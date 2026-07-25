@@ -1,0 +1,342 @@
+/*
+ * The evidence report. trd.md §5.5.
+ *
+ * The dashboard is dark and this document is black on white, and the contrast is
+ * doing rhetorical work: the dashboard is the operations product, this is a legal
+ * instrument. Its credibility comes from looking boring.
+ *
+ * Constraints that are not stylistic preferences:
+ *  - No flexbox and no grid anywhere in the document. Page-break behaviour across
+ *    flex and grid containers is inconsistent between engines.
+ *  - No position: fixed running footers. Some engines repeat them on every page,
+ *    others drop them entirely.
+ *  - No overflow: hidden on any ancestor of printed content; it clips everything
+ *    past page one.
+ *  - System fonts only. A webfont fetch here is an unforced error.
+ */
+
+/* The root layout ships the dark theme. Undo it for this route. */
+html.wd-print,
+html.wd-print body {
+  background: #ffffff !important;
+  color: #000000 !important;
+  overflow: visible !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+}
+
+@page {
+  size: Letter;
+  margin: 0.75in;
+}
+
+/* The number one killer: dark headers and backgrounds print white without this. */
+* {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.doc {
+  max-width: 7in;
+  margin: 0 auto;
+  padding: 0.5in 0.35in 0.75in;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  color: #000;
+}
+
+.doc section {
+  break-inside: avoid;
+  margin-bottom: 20px;
+}
+
+.doc h1,
+.doc h2,
+.doc h3 {
+  break-after: avoid;
+}
+
+.mono-b {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* ---------- 1. header band ---------- */
+
+.rep-head {
+  border-bottom: 2px solid #000;
+  padding-bottom: 7px;
+  margin-bottom: 5px;
+}
+
+.rep-head table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rep-org {
+  font-size: 14.5pt;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+}
+
+.rep-org-sub {
+  font-size: 8pt;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: #333;
+  margin-top: 2px;
+}
+
+.rep-case {
+  text-align: right;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+
+.rep-case strong {
+  font-size: 11pt;
+}
+
+.rep-generated {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 8.5pt;
+  color: #222;
+  border-bottom: 1px solid #000;
+  padding-bottom: 9px;
+  margin-bottom: 18px;
+}
+
+/* ---------- section headings ---------- */
+
+.sec-title {
+  font-size: 9pt;
+  font-weight: bold;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #000;
+  padding-bottom: 3px;
+  margin: 0 0 9px;
+}
+
+/* ---------- definition tables ---------- */
+
+table.defs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10pt;
+}
+
+table.defs td {
+  padding: 3.5px 0;
+  vertical-align: top;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+table.defs td.k {
+  width: 33%;
+  font-size: 8.5pt;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #333;
+  padding-right: 12px;
+}
+
+/* The row that connects this document to an unlawful-detainer filing. */
+tr.lease-row td {
+  background: #f0f0f0;
+  border-top: 1.5px solid #000;
+  border-bottom: 1.5px solid #000;
+  font-weight: bold;
+  padding: 6px 6px;
+}
+
+tr.lease-row td.k {
+  font-weight: bold;
+  color: #000;
+}
+
+/* ---------- log tables ---------- */
+
+table.log {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+}
+
+table.log th {
+  text-align: left;
+  font-size: 7.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #000;
+  padding: 4px 6px 4px 0;
+}
+
+table.log td {
+  padding: 5px 6px 5px 0;
+  border-bottom: 1px solid #e0e0e0;
+  vertical-align: top;
+}
+
+table.log tr {
+  break-inside: avoid;
+}
+
+.stamp-cell {
+  font-family: 'Courier New', Courier, monospace;
+  white-space: nowrap;
+  width: 1.55in;
+}
+
+/* ---------- raw model output ---------- */
+
+.raw-json {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 8pt;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid #999;
+  background: #f7f7f7;
+  padding: 9px 10px;
+  margin-top: 8px;
+}
+
+.raw-label {
+  font-size: 7.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #333;
+  margin-top: 12px;
+}
+
+/* ---------- frames ---------- */
+
+.frame-note {
+  font-size: 8.5pt;
+  color: #222;
+  margin-bottom: 9px;
+  font-style: italic;
+}
+
+table.frames {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 9px;
+}
+
+table.frames td.frame-cell {
+  width: 50%;
+  break-inside: avoid;
+  vertical-align: top;
+  border: 1px solid #999;
+  padding: 6px;
+}
+
+table.frames img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #bbb;
+}
+
+.frame-caption {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 7.5pt;
+  line-height: 1.5;
+  margin-top: 5px;
+  color: #111;
+}
+
+/* ---------- disposition ---------- */
+
+.disposition-box {
+  border: 2.5px solid #000;
+  padding: 13px 15px;
+  break-inside: avoid;
+}
+
+.disposition-label {
+  font-size: 15pt;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.disposition-meta {
+  font-size: 9pt;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+/* ---------- custody and attestation ---------- */
+
+.custody {
+  font-size: 9pt;
+  line-height: 1.55;
+}
+
+.attestation {
+  break-inside: avoid;
+  border-top: 1.5px solid #000;
+  padding-top: 13px;
+  margin-top: 26px;
+  font-size: 9.5pt;
+}
+
+.sig-line {
+  border-bottom: 1px solid #000;
+  height: 26px;
+  margin-top: 22px;
+  width: 62%;
+}
+
+.sig-caption {
+  font-size: 8pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #333;
+  margin-top: 4px;
+}
+
+.id-strip {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 7.5pt;
+  color: #222;
+  border-top: 1px solid #999;
+  margin-top: 22px;
+  padding-top: 7px;
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+/* ---------- screen-only affordance ---------- */
+
+.print-bar {
+  max-width: 7in;
+  margin: 22px auto 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 9pt;
+  color: #444;
+  text-align: center;
+}
+
+.print-bar button {
+  font-family: inherit;
+  font-size: 9pt;
+  letter-spacing: 0.1em;
+  padding: 8px 18px;
+  border: 1px solid #000;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media print {
+  .print-bar {
+    display: none;
+  }
+  .doc {
+    padding: 0;
+    max-width: none;
+  }
+}

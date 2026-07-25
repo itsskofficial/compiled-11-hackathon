@@ -1,0 +1,33 @@
+{
+  "name": "warden",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test:gate": "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/gate.test.mts",
+    "test:api": "node scripts/smoke.mjs",
+    "test:sse": "node scripts/sse.mjs",
+    "test:browser": "node scripts/browser.mjs",
+    "verify": "npm run typecheck && npm run test:gate && npm run test:api && npm run test:sse && npm run test:browser"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "@hexclave/next": "^1.0.64",
+    "next": "16.2.11",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "playwright": "^1.62.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
